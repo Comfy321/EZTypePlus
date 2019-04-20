@@ -1,3 +1,4 @@
+import java.util.*;
 import java.math.*;
 import java.text.*;
 import java.io.*;
@@ -20,7 +21,6 @@ public class Score
 	public void Submit()
 	{
 
-		BufferedReader reader = new BufferedReader(new FileReader("stats"));
 		int linenum=this.getLineNumberOfPrompt();
 		if(linenum==-1) //create entry for prompt if there isn't one already.
 		{
@@ -29,18 +29,21 @@ public class Score
 	}
 	public int getLineNumberOfPrompt()
 	{
-		try
+		File stats= new File("stats");
+		Scanner fileReader=null;
+		try {fileReader = new Scanner(stats); }
+		catch(Exception e) { System.out.println(e); }
+		int i=0;
+		while(fileReader.hasNextLine())
 		{
-			if(reader.readLine()==prompt)
-				return(reader.getLineNumber());
+			i++;
+			if(fileReader.nextLine()==prompt)
+				return i;
 		}
-		catch(Exception e)
-		{
-			return -1;
-		}
+		return -1;
 	}
-	public static int countLinesNew(String filename) throws IOException {
-		InputStream is = new BufferedInputStream(new FileInputStream(filename));
+	public static int countLinesNew() throws IOException {
+		InputStream is = new BufferedInputStream(new FileInputStream("stats"));
 		try 
 		{
 			byte[] c = new byte[1024];
