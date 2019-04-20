@@ -63,7 +63,7 @@ class PlayMenu implements Menu
 			System.out.println("Too inaccurate to score. Not Counting.");
 			return null;
 		}
-		return new Score(getPoints(sim, time), time, sim+70);
+		return new Score(getPoints(sim, time), time, sim+70, prompt);
 	}
 	public static double getPoints(double s, double t) //calculate score based on time and similarity
 	{ return (double) ((s/t) * 1000.0) ;}
