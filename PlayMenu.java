@@ -3,8 +3,9 @@ import java.util.concurrent.TimeUnit;
 import java.io.*;
 class PlayMenu implements Menu
 {
-	public static ArrayList<String> prompts = new ArrayList<String>();
+	public static ArrayList<String> prompts = new ArrayList<String>(); 
 	public static void genPrompts()
+		//populates static ArrayList prompts with the contents of promptList
 	{
 		try
 		{
@@ -46,7 +47,8 @@ class PlayMenu implements Menu
 			Play(prompts.get(choice)).Submit();
 		}
 	}
-	public static Score Play(String prompt) //returns time it take to type prompt.
+	public static Score Play(String prompt)
+		//Gives user a prompt and returns Score object (see Score.java) 
 	{
 		MainMenu.Clear();
 		Scanner s = new Scanner(System.in);
@@ -68,6 +70,7 @@ class PlayMenu implements Menu
 	public static double getPoints(double s, double t) //calculate score based on time and similarity
 	{ return (double) ((s/t) * 1000.0) ;}
 	public static double Similarity(String s1, String s2)
+		//calculates string similarity between two strings.
 	{
 		String longer = s1, shorter = s2;
 		if (s1.length() < s2.length())

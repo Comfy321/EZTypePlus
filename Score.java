@@ -2,6 +2,7 @@ import java.util.*;
 import java.math.*;
 import java.text.*;
 import java.io.*;
+//Score Objects - Consist of points, seconds, accuracy, and accosiated prompt.
 public class Score
 {
 	private static DecimalFormat twoPlaces = new DecimalFormat("#.##");
@@ -20,6 +21,7 @@ public class Score
 	{ return (points +" points " +seconds +" seconds " +accuracy +"% accuracy"); }
 	public void Submit()
 	{
+		//"Submits" score to stats file; adds above toString method below where whatever prompt is in stats
 		PrintWriter statsFile = null;
 		try
 		{
@@ -38,6 +40,7 @@ public class Score
 		statsFile.close();
 	}
 	public int getLineNumberOfPrompt()
+	//finds this.prompt in stats file, returns line no. If stats doesn't include this prompt, returns -1.
 	{
 		File stats= new File("stats");
 		Scanner fileReader=null;
