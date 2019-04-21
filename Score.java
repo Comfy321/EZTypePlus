@@ -20,12 +20,22 @@ public class Score
 	{ return (points +" points " +seconds +" seconds " +accuracy +"% accuracy"); }
 	public void Submit()
 	{
-
+		PrintWriter statsFile = null;
+		try
+		{
+			FileWriter fw = new FileWriter("stats", true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			statsFile = new PrintWriter(bw);
+		}
+		catch(Exception e) { System.out.println(e); }
 		int linenum=this.getLineNumberOfPrompt();
 		if(linenum==-1) //create entry for prompt if there isn't one already.
 		{
-
+			statsFile.println(prompt);
+			linenum=this.getLineNumberOfPrompt();
 		}
+		statsFile.println(this.toString());
+		statsFile.close();
 	}
 	public int getLineNumberOfPrompt()
 	{

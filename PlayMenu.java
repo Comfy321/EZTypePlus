@@ -43,7 +43,7 @@ class PlayMenu implements Menu
 				choice--;
 			else
 				MainMenu.Display();
-			System.out.println(Play(prompts.get(choice)));
+			Play(prompts.get(choice)).Submit();
 		}
 	}
 	public static Score Play(String prompt) //returns time it take to type prompt.
