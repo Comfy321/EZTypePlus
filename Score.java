@@ -19,7 +19,7 @@ public class Score
 		prompt=pr;
 	}
 	public String toString()
-	{ return "\t" +points +" points " +seconds +"seconds " +accuracy +"%accuracy "; }
+	{ return "\t" +points +"points " +seconds +"seconds " +accuracy +"%accuracy "; }
 	public void Submit()
 	{
 		//"Submits" score to stats file; adds above toString method below where whatever prompt is in stats
@@ -40,7 +40,8 @@ public class Score
 		}
 		else
 		{
-			insert(linenum+2, this.toString().getBytes());
+			try { insert(new File("stats"),linenum+1,this.toString()); }
+			catch(Exception e) { System.out.println();}
 		}
 		statsFile.close();
 	}
@@ -102,27 +103,30 @@ public class Score
 			is.close();
 		}
 	}
-
-	public void insert(long offset, byte[] content)
-	{
-		try
+	public static void insert(File inFile, int lineno, String lineToBeInserted) 
+			throws Exception
 		{
-			String filename="stats";
-			RandomAccessFile r = new RandomAccessFile(new File(filename), "rw");
-			RandomAccessFile rtemp = new RandomAccessFile(new File(filename + "~"), "rw");
-			long fileSize = r.length();
-			FileChannel sourceChannel = r.getChannel();
-			FileChannel targetChannel = rtemp.getChannel();
-			sourceChannel.transferTo(offset, (fileSize - offset), targetChannel);
-			sourceChannel.truncate(offset);
-			r.seek(offset);
-			r.write(content);
-			long newOffset = r.getFilePointer();
-			targetChannel.position(0L);
-			sourceChannel.transferFrom(targetChannel, newOffset, (fileSize - offset));
-			sourceChannel.close();
-			targetChannel.close();
+			// temp file
+			File outFile = new File("$$$$$$$$.tmp");
+			// input
+			FileInputStream fis  = new FileInputStream(inFile);
+			BufferedReader in = new BufferedReader
+				(new InputStreamReader(fis));
+			// output         
+			FileOutputStream fos = new FileOutputStream(outFile);
+			PrintWriter out = new PrintWriter(fos);
+			String thisLine = "";
+			int i =1;
+			while ((thisLine = in.readLine()) != null)
+			{
+				if(i == lineno) out.println(lineToBeInserted);
+				out.println(thisLine);
+				i++;
+			}
+			out.flush();
+			out.close();
+			in.close();
+			inFile.delete();
+			outFile.renameTo(inFile);
 		}
-		catch(Exception e) { System.out.println(e); }
-	}
 }
