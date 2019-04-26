@@ -44,7 +44,9 @@ class PlayMenu implements Menu
 				choice--;
 			else
 				MainMenu.Display();
-			Play(prompts.get(choice)).Submit();
+			Score thisScore = Play(prompts.get(choice));
+			if(thisScore!=null)
+				thisScore.Submit();
 		}
 	}
 	public static Score Play(String prompt)

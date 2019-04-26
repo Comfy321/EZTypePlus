@@ -17,7 +17,7 @@ class MainMenu implements Menu
 		switch(input)
 		{
 			case 1:PlayMenu.Display();break;
-			case 2:break;
+			case 2:StatMenu.Display();break;
 			case 3:System.exit(0);break;
 			default:System.out.println("An Error Occured");break;
 		}
