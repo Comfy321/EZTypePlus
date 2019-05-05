@@ -19,7 +19,7 @@ public class Score
 		prompt=pr;
 	}
 	public String toString()
-	{ return "\t" +points +"points " +seconds +"seconds " +accuracy +"%accuracy "; }
+	{ return "\t" +points +"p" +seconds +"s" +accuracy +"a"; }
 	public void Submit()
 	{
 		//"Submits" score to stats file; adds above toString method below where whatever prompt is in stats

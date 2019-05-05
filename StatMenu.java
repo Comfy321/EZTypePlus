@@ -8,7 +8,7 @@ public class StatMenu implements Menu
 			PlayMenu.genPrompts();
 		while(true)
 		{
-			System.out.println("---Stats---\n0)back");
+			System.out.println("---Stats---\n0) Back");
 			for(int i=1; i<=PlayMenu.prompts.size();i++)
 				System.out.println(i +") " +PlayMenu.prompts.get(i-1));
 			int choice=-1;
@@ -28,13 +28,16 @@ public class StatMenu implements Menu
 			BufferedReader reader;
 			try {
 				reader = new BufferedReader(new FileReader("stats"));
-				String line = reader.readLine();
-				System.out.println(reader.readLine());
-				for (line = reader.readLine(); line.charAt(0)=='\t'; )
-			       	{
+                //First, move Scanner to Correct Line
+                for (int i=1; i<lineno;i++)
+                   reader.readLine();
+				ArrayList<String> scores = new ArrayList<String>();
+                System.out.println(reader.readLine());
+                String line="";
+				while ((line=reader.readLine())!=null && line.charAt(0)=='\t')
+				{
 					System.out.println(line);
-					// read next line
-					line = reader.readLine();
+					scores.add(line);
 				}
 				reader.close();
 			} 
