@@ -1,5 +1,5 @@
 # EZTYPE+
-A Java program with the goal of helping the user imnprove their typing speed.   
+A Java program with the goal of helping the user improve their typing speed.   
 Features Include:
 - Play on Prompts
 - View Progress
