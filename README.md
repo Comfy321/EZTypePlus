@@ -1,3 +1,4 @@
+(this was a highschool java class final project)
 # EZTYPE+
 A Java program with the goal of helping the user improve their typing speed.   
 Features Include:
